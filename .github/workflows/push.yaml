@@ -32,7 +32,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t asadullahkhan/java-21-gsm-app:tagname:0.${{ github.run_number }}.0 -f Dockerfile .
+          docker build -t asadullahkhan/java-21-gsm-app:0.${{ github.run_number }}.0 -f Dockerfile .
 
       - name: Log in to DockerHub
         uses: docker/login-action@v2
