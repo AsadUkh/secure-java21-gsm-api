@@ -42,7 +42,7 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker push asadullahkhan/java-21-gsm-app:tagname:0.${{ github.run_number }}.0
+          docker push asadullahkhan/java-21-gsm-app:0.${{ github.run_number }}.0
 
       # - name: Update Helm chart with new image tag
       #   run: |
