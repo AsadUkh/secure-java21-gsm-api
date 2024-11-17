@@ -44,11 +44,19 @@ jobs:
         run: |
           docker push asadullahkhan/java-21-gsm-app:0.${{ github.run_number }}.0
 
-      # - name: Update Helm chart with new image tag
-      #   run: |
-      #     helm repo update
-      #     helm upgrade my-spring-boot-app ./helm-chart --set image.tag=${{ github.run_number }} --namespace my-namespace --reuse-values
+      - name: Checkout Helm chart repository
+        uses: actions/checkout@v3
+        with:
+          repository: 'AsadUkh/secure-java21-gsm-api-helm'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: helm-chart-repo
 
-      # - name: Sync with ArgoCD (optional)
-      #   run: |
-      #     argocd app sync my-spring-boot-app --auth-token ${{ secrets.ARGOCD_AUTH_TOKEN }}
+      - name: Update imageTag in values.yaml
+        run: |
+          sed -i 's/^imageTag:.*/imageTag: "${{ github.run_number }}"/' helm-chart-repo/values.yaml
+          cd helm-chart-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add values.yaml
+          git commit -m "Update imageTag to ${{ github.run_number }}"
+          git push origin master
