@@ -21,7 +21,6 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '21'
-          # maven-version: '3.8.4'
 
 
       - name: Set new version with Maven
@@ -53,7 +52,7 @@ jobs:
 
       - name: Update imageTag in values.yaml
         run: |
-          sed -i 's/^imageTag:.*/imageTag: "${{ github.run_number }}"/' helm-chart-repo/values.yaml
+          sed -i 's/^imageTag:.*/imageTag: "0.${{ github.run_number }}.0"/' helm-chart-repo/values.yaml
           cd helm-chart-repo
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
