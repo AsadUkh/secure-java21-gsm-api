@@ -15,7 +15,7 @@ public class HelloWorldController {
     @GetMapping("/secret")
     public String getSecret() {
 
-        String projectId = "gcp-hackathon-macys";
+        String projectId = "utopian-sky-444112-d5";
         String secretId = "my-first-secret";
         String versionId = "latest";
 
